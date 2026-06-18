@@ -1,0 +1,26 @@
+# secrets
+.env
+*.json
+!package.json
+
+# terraform state
+**/.terraform/
+*.tfstate
+*.tfstate.backup
+*.tfvars
+.terraform.lock.hcl
+
+# python
+__pycache__/
+*.pyc
+.venv/
+
+# airflow
+logs/
+airflow.db
+
+# data files (seed CSVs committed but raw downloads not)
+ingestion/scraper/downloads/
+
+# OS
+.DS_Store
