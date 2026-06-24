@@ -194,6 +194,8 @@ resource "google_bigquery_table" "revenue_segments" {
     { name = "voice_kes_bn",                  type = "NUMERIC", description = "Section 4B — Voice revenue (KES billions)" },
     { name = "mobile_data_kes_bn",            type = "NUMERIC", description = "Section 4B — Mobile Data revenue (KES billions)" },
     { name = "messaging_kes_bn",              type = "NUMERIC", description = "Section 4B — Messaging (SMS) revenue (KES billions)" },
+    { name = "mobile_incoming_kes_bn",        type = "NUMERIC", description = "Section 4B — Mobile Incoming revenue (KES billions). Required to reconcile to connectivity_total." },
+    { name = "other_mobile_service_kes_bn",   type = "NUMERIC", description = "Section 4B — Other Mobile Service revenue incl. content (KES billions)" },
     { name = "mpesa_kes_bn",                  type = "NUMERIC", description = "M-PESA revenue — ties to mpesa_metrics.mpesa_revenue_kes_bn for the same period (KES billions)" },
     { name = "fixed_service_iot_kes_bn",      type = "NUMERIC", description = "Section 4C — Fixed Service and IoT revenue (KES billions)" },
     { name = "connectivity_total_kes_bn",     type = "NUMERIC", description = "Section 1a/4B — total Connectivity revenue (KES billions)" },
