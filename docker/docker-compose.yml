@@ -1,7 +1,5 @@
-version: "3.8"
-
 x-airflow-common: &airflow-common
-  image: apache/airflow:2.9.2
+  image: kenya-health-airflow:latest
   environment:
     AIRFLOW__CORE__EXECUTOR: LocalExecutor
     AIRFLOW__CORE__LOAD_EXAMPLES: "false"
@@ -9,7 +7,6 @@ x-airflow-common: &airflow-common
     AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:airflow@postgres/airflow
     AIRFLOW__CORE__FERNET_KEY: ""
     AIRFLOW__WEBSERVER__SECRET_KEY: safaricom-intel-secret
-    # Runtime env vars — passed through from .env
     GCP_PROJECT_ID: ${GCP_PROJECT_ID}
     GCS_BUCKET_NAME: ${GCS_BUCKET_NAME}
     GCP_CREDENTIALS_FILE: /opt/airflow/gcp/safaricom-intelligence-sa.json
@@ -31,11 +28,13 @@ x-airflow-common: &airflow-common
 
 services:
   postgres:
-    image: postgres:15
+    image: postgres:13
     environment:
       POSTGRES_USER: airflow
       POSTGRES_PASSWORD: airflow
       POSTGRES_DB: airflow
+    ports:
+      - "5439:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:
@@ -58,7 +57,7 @@ services:
     command: >
       bash -c "pip install google-cloud-storage google-cloud-bigquery pdfplumber requests pandas --quiet && airflow webserver"
     ports:
-      - "8080:8080"
+      - "8085:8080"
     healthcheck:
       test: ["CMD", "curl", "--fail", "http://localhost:8080/health"]
       interval: 30s
