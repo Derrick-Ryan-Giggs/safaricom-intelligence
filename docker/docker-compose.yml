@@ -1,5 +1,5 @@
 x-airflow-common: &airflow-common
-  image: kenya-health-airflow:latest
+  image: safaricom-intel-airflow:latest
   environment:
     AIRFLOW__CORE__EXECUTOR: LocalExecutor
     AIRFLOW__CORE__LOAD_EXAMPLES: "false"
@@ -44,18 +44,12 @@ services:
 
   airflow-init:
     <<: *airflow-common
-    command: >
-      bash -c "
-        pip install google-cloud-storage google-cloud-bigquery pdfplumber requests pandas --quiet &&
-        airflow db migrate &&
-        airflow users create --username admin --password admin --firstname Admin --lastname Admin --role Admin --email admin@example.com
-      "
+    command: bash -c "airflow db migrate && airflow users create --username admin --password admin --firstname Admin --lastname Admin --role Admin --email admin@example.com"
     restart: on-failure
 
   airflow-webserver:
     <<: *airflow-common
-    command: >
-      bash -c "pip install google-cloud-storage google-cloud-bigquery pdfplumber requests pandas --quiet && airflow webserver"
+    command: airflow webserver
     ports:
       - "8085:8080"
     healthcheck:
@@ -67,8 +61,7 @@ services:
 
   airflow-scheduler:
     <<: *airflow-common
-    command: >
-      bash -c "pip install google-cloud-storage google-cloud-bigquery pdfplumber requests pandas --quiet && airflow scheduler"
+    command: airflow scheduler
     restart: always
 
 volumes:

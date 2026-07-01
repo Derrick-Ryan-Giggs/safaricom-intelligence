@@ -170,7 +170,7 @@ resource "google_bigquery_table" "mpesa_metrics" {
     { name = "merchants_mn",               type = "NUMERIC", description = "Total merchant count — Pochi tills + Lipa na M-PESA (millions)" },
     { name = "business_payments_kes_bn",   type = "NUMERIC", description = "Section 4Ab — Business Payments revenue (KES billions)" },
     { name = "mpesa_global_kes_bn",        type = "NUMERIC", description = "Section 4Ad — M-PESA Global revenue (KES billions)" },
-    { name = "fuliza_metric_tbd",          type = "NUMERIC", description = "PLACEHOLDER — Section 4Ac Financial Services metric. Column to be renamed once exact row label is confirmed from the FY26 booklet pages 29-35." },
+    { name = "merchant_overdraft_customers", type = "NUMERIC", description = "Section 4Ac — Merchant overdraft (Fuliza) customer count. Integer count stored as NUMERIC for BQ schema consistency." },
   ]))
 }
 

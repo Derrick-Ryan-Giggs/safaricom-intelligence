@@ -1,2 +1,2 @@
-period_label,period_type,fiscal_year,period_end_date,mpesa_revenue_kes_bn,mpesa_txn_value_kes_bn,mpesa_txn_volume_mn,mpesa_customers_1m_mn,merchants_mn,business_payments_kes_bn,mpesa_global_kes_bn,fuliza_metric_tbd
+period_label,period_type,fiscal_year,period_end_date,mpesa_revenue_kes_bn,mpesa_txn_value_kes_bn,mpesa_txn_volume_mn,mpesa_customers_1m_mn,merchants_mn,business_payments_kes_bn,mpesa_global_kes_bn,merchant_overdraft_customers
 FY26,FY,2026,2026-03-31,182.74,41680,46410,40.99,3.13,56.67,4.50,41033

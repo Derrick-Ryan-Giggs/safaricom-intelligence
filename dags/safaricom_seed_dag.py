@@ -33,7 +33,7 @@ with DAG(
             "mpesa_metrics":     ["period_label","period_type","fiscal_year","period_end_date",
                                    "mpesa_revenue_kes_bn","mpesa_txn_value_kes_bn","mpesa_txn_volume_mn",
                                    "mpesa_customers_1m_mn","merchants_mn","business_payments_kes_bn",
-                                   "mpesa_global_kes_bn","fuliza_metric_tbd"],
+                                   "mpesa_global_kes_bn","merchant_overdraft_customers"],
             "revenue_segments":  ["period_label","period_type","fiscal_year","period_end_date",
                                    "voice_kes_bn","mobile_data_kes_bn","messaging_kes_bn",
                                    "mobile_incoming_kes_bn","other_mobile_service_kes_bn",
