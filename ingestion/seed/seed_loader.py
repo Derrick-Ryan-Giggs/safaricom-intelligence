@@ -50,7 +50,7 @@ SCHEMAS = {
         bigquery.SchemaField("merchants_mn",             "NUMERIC"),
         bigquery.SchemaField("business_payments_kes_bn", "NUMERIC"),
         bigquery.SchemaField("mpesa_global_kes_bn",      "NUMERIC"),
-        bigquery.SchemaField("fuliza_metric_tbd",        "NUMERIC"),
+        bigquery.SchemaField("merchant_overdraft_customers", "NUMERIC"),
     ],
     "revenue_segments": PERIOD_COLS + [
         bigquery.SchemaField("voice_kes_bn",                 "NUMERIC"),
