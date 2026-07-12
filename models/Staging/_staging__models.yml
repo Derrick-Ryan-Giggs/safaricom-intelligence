@@ -1,0 +1,78 @@
+version: 2
+
+models:
+  - name: stg_company_overview
+    description: >
+      One row per Safaricom fiscal period, Group consolidated level.
+      Casts/renames raw.company_overview 1:1 and adds a hashed period_key
+      plus derived margin ratios (EBIT margin, net margin, capex intensity).
+    columns:
+      - name: period_key
+        description: Surrogate key hashed from period_label + period_type + fiscal_year
+        tests:
+          - unique
+          - not_null
+      - name: period_label
+        tests:
+          - not_null
+      - name: period_type
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['FY', 'HY']
+      - name: fiscal_year
+        tests:
+          - not_null
+      - name: period_end_date
+        tests:
+          - not_null
+      - name: service_revenue_kes_bn
+        description: Used as the denominator for margin ratios — must be present and positive.
+        tests:
+          - not_null
+
+  - name: stg_mpesa_metrics
+    description: >
+      One row per fiscal period, M-PESA segment (Safaricom Kenya).
+      Adds a derived average-value-per-transaction metric.
+    columns:
+      - name: period_key
+        tests:
+          - unique
+          - not_null
+      - name: mpesa_revenue_kes_bn
+        tests:
+          - not_null
+
+  - name: stg_revenue_segments
+    description: >
+      One row per fiscal period, Kenya revenue broken out by product segment
+      (voice, data, messaging, M-PESA, fixed/IoT). Includes a
+      computed_total_service_revenue_kes_bn reconciliation column checked
+      against the reported total by tests/assert_revenue_segments_reconcile.sql.
+    columns:
+      - name: period_key
+        tests:
+          - unique
+          - not_null
+      - name: total_service_revenue_kes_bn
+        tests:
+          - not_null
+
+  - name: stg_kenya_ethiopia
+    description: >
+      One row per geography (KE/ET) per fiscal period. Ethiopia rows may have
+      null revenue/EBIT before commercial launch (STE went live Oct 2022).
+    columns:
+      - name: period_geo_key
+        description: Surrogate key hashed from period_label + period_type + fiscal_year + geography
+        tests:
+          - unique
+          - not_null
+      - name: geography
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['KE', 'ET']
