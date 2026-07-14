@@ -1,27 +1,36 @@
-# secrets
+# ── secrets & credentials ────────────────────────────────
 .env
-*.json
+*-sa.json
+*service-account*.json
+*credentials*.json
+gcp/
 !package.json
 
-# terraform state
+# ── terraform ─────────────────────────────────────────────
 **/.terraform/
 *.tfstate
-*.tfstate.backup
+*.tfstate.*
 *.tfvars
-.terraform.lock.hcl
+# .terraform.lock.hcl — commit this one, don't ignore it
 
-# python
+# ── python ────────────────────────────────────────────────
 __pycache__/
 *.pyc
 .venv/
 
-# airflow
+# ── airflow ───────────────────────────────────────────────
 logs/
 airflow.db
 
-# data files (seed CSVs committed but raw downloads not)
+# ── dbt ───────────────────────────────────────────────────
+target/
+dbt_packages/
+dbt_internal_packages/
+dbt_modules/
+.user.yml
+
+# ── data files (seed CSVs are committed, raw downloads aren't) ──
 ingestion/scraper/downloads/
 
-# OS
+# ── OS ────────────────────────────────────────────────────
 .DS_Store
-.bruin.yml

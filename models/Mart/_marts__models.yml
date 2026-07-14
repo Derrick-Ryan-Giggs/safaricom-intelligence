@@ -1,0 +1,62 @@
+version: 2
+
+models:
+  - name: mart_mpesa_growth_trends
+    description: >
+      M-PESA Intelligence mart. One row per fiscal period. Combines
+      stg_mpesa_metrics with the M-PESA share-of-total figure from
+      stg_revenue_segments, and adds YoY growth rates (revenue, customers,
+      merchants, business payments) plus a 3-period trailing average of
+      M-PESA revenue. Powers Looker Studio Page 1 — M-PESA Intelligence.
+    columns:
+      - name: period_key
+        tests:
+          - unique
+          - not_null
+      - name: period_type
+        tests:
+          - accepted_values:
+              arguments:
+                values: ['FY', 'HY']
+      - name: mpesa_revenue_kes_bn
+        tests:
+          - not_null
+
+  - name: mart_revenue_mix
+    description: >
+      Revenue Mix mart. One row per fiscal period. Every Kenya revenue
+      segment (voice, mobile data, messaging, M-PESA, fixed/IoT) expressed
+      as a % share of total service revenue, plus YoY growth per segment.
+      Powers Looker Studio Page 2 — Revenue Mix (stacked area + share table).
+    columns:
+      - name: period_key
+        tests:
+          - unique
+          - not_null
+      - name: total_service_revenue_kes_bn
+        tests:
+          - not_null
+
+  - name: mart_ke_et_trajectory
+    description: >
+      Kenya vs Ethiopia mart. One row per fiscal period (wide format —
+      Kenya and Ethiopia columns side by side, pivoted from
+      stg_kenya_ethiopia). Includes EBIT margin for both geographies, YoY
+      revenue growth, and an EBIT loss-narrowing delta for Ethiopia. Powers
+      Looker Studio Page 3 — Kenya vs Ethiopia (dual-axis line + EBIT trend).
+    columns:
+      - name: period_label
+        tests:
+          - not_null
+      - name: fiscal_year
+        tests:
+          - not_null
+      - name: period_type
+        tests:
+          - accepted_values:
+              arguments:
+                values: ['FY', 'HY']
+      - name: ke_service_revenue_kes_bn
+        description: Kenya should always be present — Ethiopia (STE) launched later, Oct 2022.
+        tests:
+          - not_null

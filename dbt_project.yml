@@ -1,0 +1,30 @@
+name: 'safaricom_intelligence'
+version: '1.0.0'
+config-version: 2
+
+profile: 'safaricom_intelligence'
+
+model-paths: ["models"]
+analysis-paths: ["analyses"]
+test-paths: ["tests"]
+seed-paths: ["seeds"]
+macro-paths: ["macros"]
+snapshot-paths: ["snapshots"]
+docs-paths: ["models"]
+
+clean-targets:
+  - "target"
+  - "dbt_packages"
+
+# No external packages (dbt_utils etc.) required — all helper logic lives in
+# macros/ as plain BigQuery SQL. Kept dependency-free on purpose given
+# bandwidth constraints on the dev machine.
+
+models:
+  safaricom_intelligence:
+    Staging:
+      +materialized: view
+      +schema: staging
+    Mart:
+      +materialized: table
+      +schema: mart
