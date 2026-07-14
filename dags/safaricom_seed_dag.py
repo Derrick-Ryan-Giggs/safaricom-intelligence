@@ -114,18 +114,18 @@ with DAG(
 
     def trigger_dbt():
         import os, requests
+        base_url   = os.environ.get("DBT_BASE_URL", "cloud.getdbt.com")
         account_id = os.environ["DBT_ACCOUNT_ID"]
         job_id     = os.environ["DBT_JOB_ID"]
         token      = os.environ["DBT_API_TOKEN"]
 
-        url = f"https://cloud.getdbt.com/api/v2/accounts/{account_id}/jobs/{job_id}/run/"
+        url = f"https://{base_url}/api/v2/accounts/{account_id}/jobs/{job_id}/run/"
         headers = {"Authorization": f"Token {token}", "Content-Type": "application/json"}
         payload = {"cause": "Triggered by safaricom_seed_dag"}
         r = requests.post(url, headers=headers, json=payload, timeout=30)
         r.raise_for_status()
         run_id = r.json()["data"]["id"]
         print(f"  dbt Cloud run triggered — run_id={run_id}")
-
 
     t1 = PythonOperator(task_id="validate_seed_csvs", python_callable=validate_seed_csvs)
     t2 = PythonOperator(task_id="upload_to_gcs",      python_callable=upload_to_gcs)

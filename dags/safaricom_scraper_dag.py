@@ -184,11 +184,12 @@ with DAG(
         from google.cloud import storage
         from google.oauth2 import service_account
 
-        # Trigger dbt
+# Trigger dbt
+        base_url   = os.environ.get("DBT_BASE_URL", "cloud.getdbt.com")
         account_id = os.environ["DBT_ACCOUNT_ID"]
         job_id     = os.environ["DBT_JOB_ID"]
         token      = os.environ["DBT_API_TOKEN"]
-        url = f"https://cloud.getdbt.com/api/v2/accounts/{account_id}/jobs/{job_id}/run/"
+        url = f"https://{base_url}/api/v2/accounts/{account_id}/jobs/{job_id}/run/"
         headers = {"Authorization": f"Token {token}", "Content-Type": "application/json"}
         r = requests.post(url, headers=headers,
                           json={"cause": "Triggered by safaricom_scraper_dag"}, timeout=30)
