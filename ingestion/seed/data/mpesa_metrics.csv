@@ -1,5 +1,5 @@
 period_label,period_type,fiscal_year,period_end_date,mpesa_revenue_kes_bn,mpesa_txn_value_kes_bn,mpesa_txn_volume_mn,mpesa_customers_1m_mn,merchants_mn,business_payments_kes_bn,mpesa_global_kes_bn,merchant_overdraft_customers
-FY15,FY,2015,2015-03-31,32.63,41680,46410,13.86,3.13,56.67,4.5,41033
+FY15,FY,2015,2015-03-31,32.63,41680,46410,13.86,0.05,,4.5,
 FY16,FY,2016,2016-03-31,41.5,,,16.6,,,,
 FY17,FY,2017,2017-03-31,55.08,,,19.02,,,,
 FY18,FY,2018,2018-03-31,62.91,,,20.55,,,,
